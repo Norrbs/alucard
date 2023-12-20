@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<section class="px-4 py-5 my-5 text-center">
+  <h1 class="display-5 fw-bold">Alucard: Alugueis de Carro</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">
+      Experimente a liberdade de explorar cada destino no seu próprio ritmo com a qualidade e
+      confiança dos nossos carros. Alugue conosco e transforme sua jornada em uma experiência inesquecível!
+    </p>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <a href="{% url 'listar-carro'%}" class="btn btn-light btn-lg px-4 gap-3">Alugue agora</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

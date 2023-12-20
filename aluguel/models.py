@@ -10,8 +10,8 @@ class Carro(models.Model):
   TIPOS = [
         ("Gasolina", "Gasolina"),
         ("Diesel", "Diesel"),
-        ("Hibrido", "Híbrido"),
-        ("Eletrico", "Elétrico"),
+        ("Flex", "Flex"),
+        ("Elétrico", "Elétrico"),
   ]
   STATUS = [
         ("Disponivel", "Disponivel"),
@@ -20,9 +20,13 @@ class Carro(models.Model):
 
   marca = models.CharField(max_length=200)
   modelo = models.CharField(max_length=200)
-  ano_fabricacao = models.PositiveSmallIntegerField()
-  quant_passageiros = models.PositiveSmallIntegerField()
-  transmissao = models.CharField("Câmbio", max_length=100, choices=CAMBIO, default="Manual")
-  combustivel = models.CharField("Combustivel", max_length=100, choices=TIPOS, default="Hibrido")
-  disponibilidade = models.CharField("Disponibilidade", max_length=100, choices=STATUS, DEFAULT="Disponivel")
-  preco = models.PositiveIntegerField()
+  ano_fabricacao = models.DateField("Ano de Fabricação")
+  quant_passageiros = models.PositiveSmallIntegerField("Quantidade de Passageiros")
+  transmissao = models.CharField("Transmissão", max_length=200, choices=CAMBIO, default="Manual")
+  combustivel = models.CharField("Combustivel", max_length=200, choices=TIPOS, default="Hibrido")
+  disponibilidade = models.CharField("Disponibilidade", max_length=200, choices=STATUS, default="Disponivel")
+  preco = models.PositiveIntegerField("Preço")
+  foto = models.ImageField(upload_to='avatares', blank=True, null=True)
+
+  def __str__(self):
+    return self.modelo
