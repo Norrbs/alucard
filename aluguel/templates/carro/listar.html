@@ -9,18 +9,18 @@
 <div class="row g-3">
   {% for carro in page_obj %}
   <div class="col-md-4">
-    <div class="card mb-3" style="width: 18rem;">
-      <img src="{{carro.foto.url}}" class="card-img-top" alt="...">
+    <a href="{% url 'detalhar-carro' carro.pk %}" class="card mb-3 text-bg-dark text-decoration-none">
+      <img src="{{carro.foto.url}}" class="card-img-top w-auto" style="height: 200px" alt="...">
       <div class="card-body">
         <h5 class="card-title">{{ carro.marca }} {{carro.modelo}}</h5>
-        <p class="card-text">R${{ carro.preco }}</p>
-        <a href="{% url 'detalhar' carro.id %}" class="btn btn-primary">Alugar</a>
+        <p class="card-text">R${{ carro.preco }}</p>       
       </div>
-    </div>
+    </a>
   </div>
   {% endfor %}
 </div>
 {% bootstrap_pagination page_obj %}
-
-<a class="btn btn-primary" href="{% url 'adicionar' %}" role="button">Adicionar Carro</a>
+{% if perms.aluguel.add_carro %}
+<a class="btn btn-primary" href="{% url 'cadastrar-carro' %}" role="button">Cadastrar um novo carro</a>
+{% endif %}
 {% endblock %}

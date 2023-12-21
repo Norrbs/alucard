@@ -4,6 +4,7 @@ from django.views.generic import TemplateView, ListView, CreateView, DetailView,
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .forms import RegistrationForm, CarroForm
 from .models import Carro
 
@@ -26,28 +27,30 @@ class DetalharCarroView(DetailView):
    template_name='carro/detalhar.html'
    context_object_name='carro'
 
-class CadastrarCarroView(CreateView):
+class CadastrarCarroView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Carro
     template_name = "carro/cadastrar.html"
     form_class = CarroForm
+    permission_required='aluguel.add_carro'
 
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS, "Carro cadastrado com sucesso!")
         return reverse('listar-carro')
    
-class AtualizarCarroView(UpdateView):
+class AtualizarCarroView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Carro
     template_name = "carro/atualizar.html"
     form_class = CarroForm
+    permission_required='aluguel.change_carro'
 
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS, "Carro atualizado com sucesso!")
         return reverse('listar-carro')
     
-class DeletarCarroView(DeleteView):
+class DeletarCarroView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Carro
     template_name = "carro/carro_confirm_delete.html"
-    form_class = CarroForm
+    permission_required='aluguel.delete_carro'
 
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS, "Carro deletado com sucesso!")

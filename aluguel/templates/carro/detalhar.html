@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap5 %}
+{% block title %}Carros{% endblock %}
+
+{% block content %}
+<div class="col-xxl-8 px-4 py-5">
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div class="col-10 col-sm-8 col-lg-6">
+      <img src="{{carro.foto.url}}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+    </div>
+    <div class="col-lg-6">
+      <h1 class="display-5 fw-bold lh-1 mb-3">{{ carro.marca }} {{ carro.modelo }}</h1>
+      <p class="border-top w-75 my-2">Ano de Fabricação: {{carro.ano_fabricacao}}</p>
+      <p class="border-top w-75 my-2">Quantidade de Passageiros: {{carro.quant_passageiros}}</p>
+      <p class="border-top w-75 my-2">Transmissão: {{carro.transmissao}}</p>
+      <p class="border-top w-75 my-2">Tipo de combustível: {{carro.combustivel}}</p>
+      <p class="border-top w-75 my-2">Status: {{carro.disponibilidade}}</p>
+      <p class="fs-4 fw-bold lh-1 mb-3">R${{ carro.preco }}</p>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-3">
+        <a type="button" href="#" class="btn btn-success btn-lg px-4 me-md-2">Alugar</a>
+        {% if perms.aluguel.change_carro %}
+        <a class="btn btn-outline-primary" href="{% url 'atualizar-carro' carro.pk %}">Atualizar Informações</a>
+        {% endif %}
+        {% if perms.aluguel.change_carro %}
+        <a class="btn btn-outline-danger" href="{% url 'deletar-carro' carro.pk %}">Deletar Carro</a>
+        {% endif %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="card mb-3" style="max-width: 1112px;">
+  <div class="row g-0">
+      <div class="col-md-4">
+          <img src="{{carro.foto.url}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+          <div class="card-body">
+              <h5 class="card-title">{{ carro.marca }} {{ carro.modelo }}</h5>
+              <p class="card-text">Ano: {{ carro.ano }}</p>
+              <p class="card-text">Status: {{ carro.disponibilidade }}</p>
+              <p class="card-text">Preço: R${{ carro.preco }}</p>
+          </div>
+      </div>
+  </div>
+</div> -->
