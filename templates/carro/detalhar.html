@@ -18,7 +18,7 @@
       <p class="border-top w-75 my-2">Status: {{carro.disponibilidade}}</p>
       <p class="fs-4 fw-bold lh-1 mb-3">R${{ carro.preco }}</p>
       <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-3">
-        <a type="button" href="#" class="btn btn-success btn-lg px-4 me-md-2">Alugar</a>
+        <a type="button" href="{% url 'aluguel' %}" class="btn btn-success btn-lg px-4 me-md-2">Alugar</a>
         {% if perms.aluguel.change_carro %}
         <a class="btn btn-outline-primary" href="{% url 'atualizar-carro' carro.pk %}">Atualizar Informações</a>
         {% endif %}

@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .forms import RegistrationForm, CarroForm
-from .models import Carro
+from .models import Carro, Aluguel
 
 
 # Create your views here.
@@ -64,3 +64,7 @@ class RegistrationView(CreateView):
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS, "Cadastro realizado com sucesso!")
         return reverse('home')
+    
+class AluguelView(LoginRequiredMixin, TemplateView):
+    model = Aluguel
+    template_name = 'aluguel/temporario.html'
